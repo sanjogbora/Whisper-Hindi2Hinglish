@@ -1,4 +1,17 @@
-# **Whisper-Hindi2Hinglish**
+# **Whisper-Hindi2Hinglish + Video-to-SRT**
+
+> **🔗 Fork Notice**: This is a fork of [OriserveAI/Whisper-Hindi2Hinglish](https://github.com/OriserveAI/Whisper-Hindi2Hinglish) by Oriserve AI team.
+>
+> **✨ Added Features**: Video-to-SRT subtitle generation with web UI, CLI, and REST API
+>
+> **Original Authors**: OriserveAI (ai-team@oriserve.com)
+> **Fork Maintainer**: Sanjog Bora ([@sanjogbora](https://github.com/sanjogbora))
+> **License**: Apache-2.0 (same as upstream)
+
+---
+
+## **About**
+
 Whisper-Hindi2Hinglish is a variant of OpenAI's Whisper, designed for precise, speech recognition of audios with Indian accents and heavy background noise in Hinglish (Hindi written in Latin scripture) language. It is trained on Hindi and Hinglish data and is optimized for use cases where accuracy is paramount and background noise is abundant (such as those found in typical Indian background sounds). To improve transcription on Hindi language, we finetuned **Whisper-Hindi2Hinglish** using a custom-built proprietary dataset.
 
 ## **Problem Statement**:
@@ -116,12 +129,37 @@ The server and client are also designed to be used with different models. The de
 
 The server and client use websockets to communicate with each other.
 
+## 🎬 NEW: Video to SRT Converter
+
+Convert Hindi-English mixed videos to Roman English SRT subtitle files!
+
+### Quick Start
+```bash
+# Web Interface (easiest)
+python web_server.py
+# Then open: http://localhost:5000
+
+# Command Line
+python video_to_srt.py your_video.mp4
+```
+
+**See [docs/QUICK_START.md](docs/QUICK_START.md) for complete guide**
+
+Features:
+- 🎥 Upload video, get SRT file
+- 🌐 Beautiful web interface
+- ⚡ Fast processing with GPU
+- 🎯 Accurate Hindi-English transcription
+- 📝 Properly timed subtitles
+
+---
+
 ## Usage
 
 ### Server
 To start the server, run the following command:
 ```bash
-python app.py
+python websocket_server.py
 ```
 - The server will start listening on port 8000 by default. You can change the port by passing the `--port` argument.
 - You can also change the model by passing the `--model-id` argument. The default model is `Oriserve/Whisper-Hindi2Hinglish-Swift` you can also use `Oriserve/Whisper-Hindi2Hinglish-Prime` for a better performance.

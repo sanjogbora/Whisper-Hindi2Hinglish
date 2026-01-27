@@ -1,23 +1,14 @@
 # Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
+*.pyo
+*.pyd
 .Python
-build/
-develop-eggs/
-dist/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
+*.so
 *.egg
+*.egg-info/
+dist/
+build/
 
 # Virtual environments
 venv/
@@ -30,12 +21,15 @@ ENV/
 .idea/
 *.swp
 *.swo
-*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
 
 # OS
 .DS_Store
 Thumbs.db
-nul
 
 # Project specific
 uploads/
@@ -49,32 +43,29 @@ downloads/
 *.flv
 *.wmv
 *.m4v
-examples/*.srt
 temp_audio_*.wav
+
+# Documentation (not needed in container)
+*.md
+docs/
+
+# Status files
 CUDA_SETUP_COMPLETE.txt
 SERVER_RUNNING.txt
 READY_TO_USE.txt
-GET_STARTED.txt
+
+# Tests (not needed in container)
+tests/
+.pytest_cache/
+.coverage
 
 # Model cache
 .cache/
 models/
 
-# Logs
-*.log
+# Development files
+requirements-dev.txt
+requirements-cuda.txt
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-
-# Jupyter
-.ipynb_checkpoints
-
-# mypy
-.mypy_cache/
-
-# Environments
-.env
-.venv
+# Claude
+.claude/

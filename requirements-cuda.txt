@@ -1,0 +1,22 @@
+# Requirements for Video to SRT Converter with CUDA support
+# Install with: pip install -r requirements-cuda.txt
+
+# PyTorch with CUDA 12.1 support (for GPU acceleration)
+# Install separately with:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Or for CUDA 11.8:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# Other dependencies
+accelerate==1.2.1
+librosa==0.10.2.post1
+numpy==1.26.4
+transformers==4.47.1
+webrtcvad==2.0.10
+websockets==14.1
+flask==3.0.0
+werkzeug==3.0.1
+
+# Note: PyTorch must be installed separately with CUDA support
+# The versions in requirements.txt are CPU-only

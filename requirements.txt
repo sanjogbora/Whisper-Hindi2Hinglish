@@ -1,7 +1,12 @@
 accelerate==1.2.1
 librosa==0.10.2.post1
-numpy==1.26.4
+numpy>=2.3.5
 torch==2.5.1
+torchvision==0.20.1
+torchaudio==2.5.1
 transformers==4.47.1
 webrtcvad==2.0.10
 websockets==14.1
+flask==3.0.0
+werkzeug==3.0.1
+whisper-timestamped>=1.15.9

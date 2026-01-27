@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  # Flask web server for video-to-SRT conversion
+  web-server:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./downloads:/app/downloads
+    environment:
+      - LOGLEVEL=INFO
+    command: python web_server.py
+
+  # WebSocket server for real-time streaming
+  websocket-server:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - LOGLEVEL=INFO
+    command: python websocket_server.py --host 0.0.0.0 --port 8000
