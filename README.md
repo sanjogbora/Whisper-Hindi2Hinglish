@@ -10,6 +10,67 @@
 
 ---
 
+## **🚀 Quick Start for Non-Technical Users**
+
+Want to convert your Hindi-English videos to subtitle files? Follow these simple steps:
+
+### **Step 1: Install Python**
+1. Download Python 3.10 or newer from [python.org/downloads](https://www.python.org/downloads/)
+2. During installation, **check the box "Add Python to PATH"**
+3. Click "Install Now"
+
+### **Step 2: Download This Project**
+1. Click the green "Code" button at the top of this page
+2. Click "Download ZIP"
+3. Extract the ZIP file to a folder (e.g., `C:\Whisper-Hindi2Hinglish`)
+
+### **Step 3: Install Requirements**
+1. Open Command Prompt (Windows) or Terminal (Mac)
+2. Navigate to the extracted folder:
+   ```bash
+   cd C:\Whisper-Hindi2Hinglish
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Install ffmpeg (required for video processing):
+   - **Windows**: Download from [ffmpeg.org](https://ffmpeg.org/download.html) and add to PATH, or use: `winget install ffmpeg`
+   - **Mac**: `brew install ffmpeg`
+   - **Linux**: `sudo apt install ffmpeg`
+
+### **Step 4: Start the Web Interface**
+```bash
+python web_server.py
+```
+
+Your browser will open automatically to http://localhost:5000
+
+### **Step 5: Upload Your Video**
+1. Click "Upload Video"
+2. Select your video file (MP4, AVI, MOV, MKV, etc.)
+3. Choose quality: **Prime** (best quality) or **Swift** (faster)
+4. Click "Generate SRT File"
+5. The subtitle file will download automatically
+
+**That's it!** Your `.srt` subtitle file is ready to use with any video player.
+
+### **Troubleshooting**
+
+**"Python is not recognized"**
+- Reinstall Python and check "Add Python to PATH"
+
+**"pip is not recognized"**
+- Run: `python -m pip install -r requirements.txt`
+
+**"Port 5000 is in use"**
+- Run: `python web_server.py --port 5001`
+
+**"CUDA/GPU errors"**
+- The app will use CPU instead (slower but works fine)
+
+---
+
 ## **About**
 
 Whisper-Hindi2Hinglish is a variant of OpenAI's Whisper, designed for precise, speech recognition of audios with Indian accents and heavy background noise in Hinglish (Hindi written in Latin scripture) language. It is trained on Hindi and Hinglish data and is optimized for use cases where accuracy is paramount and background noise is abundant (such as those found in typical Indian background sounds). To improve transcription on Hindi language, we finetuned **Whisper-Hindi2Hinglish** using a custom-built proprietary dataset.
