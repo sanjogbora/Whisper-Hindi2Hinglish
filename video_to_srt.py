@@ -13,7 +13,7 @@ import torch
 import whisper_timestamped as whisper
 
 from logger import logger
-from utils import torch_dtype_from_str
+from utils import torch_dtype_from_str, get_device
 
 
 def get_video_duration(video_path: str) -> float:
@@ -377,12 +377,15 @@ def video_to_srt(
         video_path: Path to input video file
         output_srt_path: Path to save SRT file (optional)
         model_id: Whisper model size (tiny, base, small, medium, large, or HF model ID)
-        device: Device to run model on
+        device: Device to run model on (auto-detects if CUDA unavailable)
         dtype: Data type for model (not used by whisper-timestamped, kept for compatibility)
 
     Returns:
         str: Path to generated SRT file
     """
+    # Automatically detect available device with CPU fallback
+    device = get_device(device)
+
     # Set default output path
     if output_srt_path is None:
         video_name = Path(video_path).stem

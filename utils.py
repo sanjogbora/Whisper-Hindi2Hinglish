@@ -7,6 +7,35 @@ import torch
 import webrtcvad
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 
+from logger import logger
+
+
+def get_device(preferred_device: str = "cuda") -> str:
+    """
+    Automatically detect available device with fallback to CPU.
+
+    Args:
+        preferred_device: Preferred device ('cuda' or 'cpu')
+
+    Returns:
+        str: Available device ('cuda' or 'cpu')
+    """
+    if preferred_device == "cuda":
+        if torch.cuda.is_available():
+            device = "cuda"
+            gpu_name = torch.cuda.get_device_name(0)
+            logger.info(f"✓ Using GPU: {gpu_name}")
+        else:
+            device = "cpu"
+            logger.warning("⚠ CUDA not available. Falling back to CPU (slower performance)")
+            logger.info("💡 To use GPU, install CUDA-enabled PyTorch:")
+            logger.info("   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121")
+    else:
+        device = "cpu"
+        logger.info("Using CPU for inference")
+
+    return device
+
 
 def torch_dtype_from_str(dtype: str, device: str) -> torch.dtype:
     """
@@ -38,8 +67,19 @@ def load_pipe(
     @param device: Device to run model on
     @param dtype: Data type for model computation
     """
+    # Ensure device is available
+    device = get_device(device)
+
+    # Adjust dtype for CPU if needed
+    if device == "cpu" and torch_dtype == torch.float16:
+        logger.info("Switching to float32 for CPU compatibility")
+        torch_dtype = torch.float32
+
     model = AutoModelForSpeechSeq2Seq.from_pretrained(
-        model_id, torch_dtype=torch_dtype, low_cpu_mem_usage=True, use_safetensors=True
+        model_id,
+        torch_dtype=torch_dtype,
+        low_cpu_mem_usage=True,
+        use_safetensors=True
     )
     model.to(device)
 

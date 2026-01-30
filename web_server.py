@@ -12,7 +12,7 @@ from flask import Flask, request, send_file, jsonify, render_template
 from werkzeug.utils import secure_filename
 
 from logger import logger
-from utils import torch_dtype_from_str
+from utils import torch_dtype_from_str, get_device
 from video_to_srt import video_to_srt
 
 app = Flask(__name__, template_folder='templates')
@@ -159,13 +159,17 @@ if __name__ == '__main__':
     parser.add_argument('--dtype', default='float16', help='Data type for model')
     
     args = parser.parse_args()
-    
+
+    # Detect available device with CPU fallback
+    available_device = get_device(args.device)
+
     # Update global config
     MODEL_CONFIG['model_id'] = args.model_id
-    MODEL_CONFIG['device'] = args.device
-    MODEL_CONFIG['dtype'] = torch_dtype_from_str(args.dtype, args.device)
-    
+    MODEL_CONFIG['device'] = available_device
+    MODEL_CONFIG['dtype'] = torch_dtype_from_str(args.dtype, available_device)
+
     logger.info(f"Starting API server on http://{args.host}:{args.port}")
     logger.info(f"Using model: {MODEL_CONFIG['model_id']}")
+    logger.info(f"Device: {available_device}, dtype: {MODEL_CONFIG['dtype']}")
     
     app.run(host=args.host, port=args.port, debug=False)
