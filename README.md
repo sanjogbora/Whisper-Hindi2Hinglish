@@ -12,62 +12,104 @@
 
 ## **🚀 Quick Start for Non-Technical Users**
 
-Want to convert your Hindi-English videos to subtitle files? Follow these simple steps:
+Want to convert your Hindi-English videos to subtitle files? It's as easy as double-clicking a file!
 
-### **Step 1: Install Python**
-1. Download Python 3.10 or newer from [python.org/downloads](https://www.python.org/downloads/)
-2. During installation, **check the box "Add Python to PATH"**
-3. Click "Install Now"
+### **One-Click Launch (Easiest Method)**
 
-### **Step 2: Download This Project**
-1. Click the green "Code" button at the top of this page
-2. Click "Download ZIP"
-3. Extract the ZIP file to a folder (e.g., `C:\Whisper-Hindi2Hinglish`)
+1. **Download this project:**
+   - Click the green "Code" button at the top of this page
+   - Click "Download ZIP"
+   - Extract the ZIP file to a folder (e.g., Desktop or Documents)
 
-### **Step 3: Install Requirements**
-1. Open Command Prompt (Windows) or Terminal (Mac)
-2. Navigate to the extracted folder:
-   ```bash
-   cd C:\Whisper-Hindi2Hinglish
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Install ffmpeg (required for video processing):
-   - **Windows**: Download from [ffmpeg.org](https://ffmpeg.org/download.html) and add to PATH, or use: `winget install ffmpeg`
-   - **Mac**: `brew install ffmpeg`
-   - **Linux**: `sudo apt install ffmpeg`
+2. **Double-click the launcher:**
+   - **Windows:** Double-click `START HERE.bat`
+   - **Mac:** Double-click `START HERE.command`
+   - **Linux:** Run `./START HERE.sh`
 
-### **Step 4: Start the Web Interface**
-```bash
-python web_server.py
-```
+3. **Let it set up automatically:**
+   - The launcher will check for Python and FFmpeg
+   - It will install missing dependencies automatically
+   - Your browser will open automatically
+   - **No terminal commands needed!**
 
-Your browser will open automatically to http://localhost:5000
+4. **Use the app:**
+   - Drag and drop your video file
+   - Choose quality: **Prime** (best) or **Swift** (faster)
+   - Click "Generate SRT File"
+   - Download your subtitle file automatically
 
-### **Step 5: Upload Your Video**
-1. Click "Upload Video"
-2. Select your video file (MP4, AVI, MOV, MKV, etc.)
-3. Choose quality: **Prime** (best quality) or **Swift** (faster)
-4. Click "Generate SRT File"
-5. The subtitle file will download automatically
+**That's it!** Your `.srt` subtitle file is ready to use with any video player or video editor.
 
-**That's it!** Your `.srt` subtitle file is ready to use with any video player.
+---
+
+### **First-Time Setup Requirements**
+
+The launcher will handle most setup automatically, but you need:
+
+1. **Python 3.10 or newer** - [Download here](https://www.python.org/downloads/)
+   - ⚠️ **IMPORTANT:** Check "Add Python to PATH" during installation
+
+2. **Internet connection** - For downloading dependencies (first run only)
+
+3. **FFmpeg** - The launcher will try to install it automatically
+   - If automatic install fails, see [FFmpeg Installation](#ffmpeg-installation) below
+
+---
 
 ### **Troubleshooting**
 
-**"Python is not recognized"**
-- Reinstall Python and check "Add Python to PATH"
+#### **"Python not found"**
+1. Download Python from [python.org/downloads](https://www.python.org/downloads/)
+2. During installation, **check "Add Python to PATH"**
+3. Restart the launcher
 
-**"pip is not recognized"**
-- Run: `python -m pip install -r requirements.txt`
+#### **"FFmpeg not found"**
+The launcher tries to install FFmpeg automatically. If it fails:
 
-**"Port 5000 is in use"**
-- Run: `python web_server.py --port 5001`
+- **Windows:** `winget install ffmpeg`
+- **Mac:** `brew install ffmpeg` (requires [Homebrew](https://brew.sh))
+- **Linux:** `sudo apt install ffmpeg` (Ubuntu/Debian)
+- **Manual:** Download from [ffmpeg.org/download.html](https://ffmpeg.org/download.html)
 
-**"CUDA/GPU errors"**
-- The app will use CPU instead (slower but works fine)
+#### **"Port 5000 is in use"**
+Close other apps using port 5000, or manually run:
+```bash
+python web_server.py --port 5001
+```
+Then open: http://localhost:5001
+
+#### **"Dependencies installation failed"**
+- Check your internet connection
+- Try manually: `pip install -r requirements.txt`
+
+#### **Server won't start**
+1. Make sure Python is installed and in PATH
+2. Check that port 5000 is available
+3. Look for error messages in the launcher window
+
+#### **"CUDA/GPU errors"**
+The app automatically falls back to CPU (slower but works fine). No action needed.
+
+---
+
+### **Manual Start (Alternative Method)**
+
+If the launcher doesn't work, you can start manually:
+
+1. **Install Python 3.10+** from [python.org](https://www.python.org/downloads/)
+2. **Install FFmpeg:**
+   - Windows: `winget install ffmpeg`
+   - Mac: `brew install ffmpeg`
+   - Linux: `sudo apt install ffmpeg`
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **Start the server:**
+   ```bash
+   python web_server.py
+   ```
+5. **Open your browser to:** http://localhost:5000
 
 ---
 

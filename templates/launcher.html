@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whisper Hindi2Hinglish - Video to SRT Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        border: "hsl(214.3 31.8% 91.4%)",
+                        input: "hsl(214.3 31.8% 91.4%)",
+                        ring: "hsl(222.2 84% 4.9%)",
+                        background: "hsl(0 0% 100%)",
+                        foreground: "hsl(222.2 84% 4.9%)",
+                        primary: {
+                            DEFAULT: "hsl(222.2 47.4% 11.2%)",
+                            foreground: "hsl(210 40% 98%)",
+                        },
+                        secondary: {
+                            DEFAULT: "hsl(210 40% 96.1%)",
+                            foreground: "hsl(222.2 47.4% 11.2%)",
+                        },
+                        muted: {
+                            DEFAULT: "hsl(210 40% 96.1%)",
+                            foreground: "hsl(215.4 16.3% 46.9%)",
+                        },
+                        accent: {
+                            DEFAULT: "hsl(210 40% 96.1%)",
+                            foreground: "hsl(222.2 47.4% 11.2%)",
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        @keyframes progress {
+            0% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        .progress-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progress 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen p-4">
+    <div class="max-w-4xl mx-auto py-8">
+        <!-- Header -->
+        <div class="text-center mb-8 animate-slide-up">
+            <h1 class="text-4xl font-bold tracking-tight text-foreground mb-2">
+                🎬 Whisper Hindi2Hinglish
+            </h1>
+            <p class="text-muted-foreground text-sm">
+                Convert Hindi/Hinglish videos to SRT subtitles with AI
+            </p>
+        </div>
+
+        <!-- System Status Card -->
+        <div class="bg-white rounded-lg shadow p-6 mb-6 animate-slide-up" style="animation-delay: 0.1s;">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-foreground">System Status</h2>
+                <span id="server-indicator" class="flex items-center gap-2 text-sm text-green-600">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    Server Running
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Python Status -->
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                    <span id="python-status" class="text-2xl pulse">⏳</span>
+                    <div>
+                        <p class="text-sm font-medium text-foreground">Python</p>
+                        <p id="python-version" class="text-xs text-muted-foreground">Checking...</p>
+                    </div>
+                </div>
+
+                <!-- FFmpeg Status -->
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                    <span id="ffmpeg-status" class="text-2xl pulse">⏳</span>
+                    <div>
+                        <p class="text-sm font-medium text-foreground">FFmpeg</p>
+                        <p id="ffmpeg-version" class="text-xs text-muted-foreground">Checking...</p>
+                    </div>
+                </div>
+
+                <!-- Dependencies Status -->
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                    <span id="deps-status" class="text-2xl pulse">⏳</span>
+                    <div>
+                        <p class="text-sm font-medium text-foreground">Dependencies</p>
+                        <p id="deps-version" class="text-xs text-muted-foreground">Checking...</p>
+                    </div>
+                </div>
+
+                <!-- Device Status -->
+                <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                    <span id="device-status" class="text-2xl pulse">⏳</span>
+                    <div>
+                        <p class="text-sm font-medium text-foreground">Processing Device</p>
+                        <p id="device-info" class="text-xs text-muted-foreground">Checking...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Upload Section -->
+        <div class="bg-white rounded-lg shadow p-8 animate-slide-up" style="animation-delay: 0.2s;">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <!-- Upload Area -->
+                <div id="uploadArea"
+                     class="relative border-2 border-dashed border-border rounded-lg p-12 text-center cursor-pointer transition-all hover:border-primary/50 hover:bg-accent/50 group">
+                    <input type="file" id="videoFile" name="video" accept="video/*" required class="hidden">
+
+                    <div class="flex flex-col items-center gap-3">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <p class="text-sm font-medium text-foreground mb-1">
+                                <span class="text-primary">Click to upload</span> or drag and drop
+                            </p>
+                            <p class="text-xs text-muted-foreground">
+                                MP4, AVI, MOV, MKV, WEBM (Max 500MB)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Info -->
+                <div id="fileInfo" class="hidden mt-4 p-4 bg-accent rounded-lg border border-border animate-slide-up">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-foreground truncate" id="fileName"></p>
+                            <p class="text-xs text-muted-foreground" id="fileSize"></p>
+                        </div>
+                        <button type="button" id="clearFile" class="text-muted-foreground hover:text-foreground transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Model Selection -->
+                <div class="mt-6">
+                    <label for="model" class="block text-sm font-medium text-foreground mb-2">
+                        Model Quality
+                    </label>
+                    <select id="model" name="model"
+                            class="w-full px-3 py-2 bg-background border border-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-shadow">
+                        <option value="prime" selected>Prime - Best quality (Recommended)</option>
+                        <option value="swift">Swift - Faster processing, good quality</option>
+                    </select>
+                    <p class="mt-1 text-xs text-muted-foreground">Prime offers superior accuracy for Hindi-English transcription</p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn"
+                        class="w-full mt-6 px-4 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-[0.98]">
+                    Generate SRT File
+                </button>
+
+                <!-- Progress -->
+                <div id="progress" class="hidden mt-6 space-y-3 animate-slide-up">
+                    <div class="relative h-2 bg-secondary rounded-full overflow-hidden">
+                        <div id="progressBar" class="absolute inset-0 bg-primary rounded-full transition-all duration-500 progress-shimmer" style="width: 0%"></div>
+                    </div>
+                    <p id="status" class="text-sm text-center text-muted-foreground"></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Help Section -->
+        <div class="mt-6 bg-blue-50 rounded-lg p-6 border border-blue-200 animate-slide-up" style="animation-delay: 0.3s;">
+            <h3 class="text-lg font-bold text-blue-900 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+                First Time Here?
+            </h3>
+            <ol class="list-decimal list-inside space-y-2 text-sm text-blue-800">
+                <li><strong>Upload your video:</strong> Drag and drop or click to select a video file</li>
+                <li><strong>Choose quality:</strong> Prime = best accuracy, Swift = faster processing</li>
+                <li><strong>Click "Generate SRT File":</strong> Wait while the AI transcribes your video</li>
+                <li><strong>Download:</strong> Your .srt subtitle file will download automatically</li>
+                <li><strong>Use in video editor:</strong> Import the .srt file into your video editing software</li>
+            </ol>
+        </div>
+
+        <!-- Info Alert -->
+        <div class="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-lg animate-slide-up" style="animation-delay: 0.4s;">
+            <div class="flex gap-3">
+                <div class="flex-shrink-0">
+                    <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="text-sm text-amber-800">
+                    <p class="font-medium mb-1">Processing Information</p>
+                    <p class="text-amber-700">
+                        Videos are transcribed to Hinglish (Hindi words in Roman script).
+                        Processing time varies based on video length and selected model quality.
+                        Keep this browser tab open while processing.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-6 text-xs text-muted-foreground">
+            <p>Powered by Whisper-Hindi2Hinglish</p>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('videoFile');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const clearFile = document.getElementById('clearFile');
+        const uploadForm = document.getElementById('uploadForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const progress = document.getElementById('progress');
+        const progressBar = document.getElementById('progressBar');
+        const status = document.getElementById('status');
+
+        // Check system status via API
+        async function checkStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+
+                // Update Python status
+                const pythonStatus = document.getElementById('python-status');
+                const pythonVersion = document.getElementById('python-version');
+                if (data.python) {
+                    pythonStatus.textContent = '✅';
+                    pythonStatus.classList.remove('pulse');
+                    pythonVersion.textContent = data.python_version || 'Installed';
+                } else {
+                    pythonStatus.textContent = '❌';
+                    pythonVersion.textContent = 'Not found';
+                }
+
+                // Update FFmpeg status
+                const ffmpegStatus = document.getElementById('ffmpeg-status');
+                const ffmpegVersion = document.getElementById('ffmpeg-version');
+                if (data.ffmpeg) {
+                    ffmpegStatus.textContent = '✅';
+                    ffmpegStatus.classList.remove('pulse');
+                    ffmpegVersion.textContent = 'Installed';
+                } else {
+                    ffmpegStatus.textContent = '❌';
+                    ffmpegVersion.textContent = 'Not found';
+                }
+
+                // Update Dependencies status
+                const depsStatus = document.getElementById('deps-status');
+                const depsVersion = document.getElementById('deps-version');
+                if (data.dependencies) {
+                    depsStatus.textContent = '✅';
+                    depsStatus.classList.remove('pulse');
+                    depsVersion.textContent = 'All packages installed';
+                } else {
+                    depsStatus.textContent = '❌';
+                    depsVersion.textContent = 'Missing packages';
+                }
+
+                // Update Device status
+                const deviceStatus = document.getElementById('device-status');
+                const deviceInfo = document.getElementById('device-info');
+                if (data.device) {
+                    if (data.device.includes('cuda') || data.device.includes('GPU')) {
+                        deviceStatus.textContent = '🚀';
+                        deviceInfo.textContent = data.device + ' (Fast)';
+                    } else {
+                        deviceStatus.textContent = '💻';
+                        deviceInfo.textContent = data.device;
+                    }
+                    deviceStatus.classList.remove('pulse');
+                } else {
+                    deviceStatus.textContent = '❓';
+                    deviceInfo.textContent = 'Unknown';
+                }
+
+            } catch (error) {
+                console.error('Status check failed:', error);
+            }
+        }
+
+        // Check status on load
+        checkStatus();
+
+        // Refresh status every 10 seconds
+        setInterval(checkStatus, 10000);
+
+        // Click to upload
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        // Highlight on drag over
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, () => {
+                uploadArea.classList.add('border-primary', 'bg-accent');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, () => {
+                uploadArea.classList.remove('border-primary', 'bg-accent');
+            }, false);
+        });
+
+        // Handle drop
+        uploadArea.addEventListener('drop', (e) => {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                displayFileInfo(files[0]);
+            }
+        });
+
+        // File selection
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                displayFileInfo(e.target.files[0]);
+            }
+        });
+
+        // Clear file
+        clearFile.addEventListener('click', () => {
+            fileInput.value = '';
+            fileInfo.classList.add('hidden');
+        });
+
+        function displayFileInfo(file) {
+            fileName.textContent = file.name;
+            fileSize.textContent = formatFileSize(file.size);
+            fileInfo.classList.remove('hidden');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        // Form submission
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(uploadForm);
+
+            submitBtn.disabled = true;
+            progress.classList.remove('hidden');
+            progressBar.style.width = '60%';
+            status.textContent = 'Uploading and processing video...';
+            status.classList.remove('text-red-600', 'text-green-600');
+            status.classList.add('text-muted-foreground');
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Upload failed');
+                }
+
+                progressBar.style.width = '100%';
+                status.textContent = 'Processing complete! Downloading...';
+
+                // Download the SRT file
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileInput.files[0].name.replace(/\.[^/.]+$/, '') + '.srt';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+
+                status.textContent = 'Success! SRT file downloaded.';
+                status.classList.add('text-green-600');
+
+                setTimeout(() => {
+                    progress.classList.add('hidden');
+                    submitBtn.disabled = false;
+                    progressBar.style.width = '0%';
+                }, 3000);
+
+            } catch (error) {
+                status.textContent = 'Error: ' + error.message;
+                status.classList.remove('text-muted-foreground');
+                status.classList.add('text-red-600');
+                submitBtn.disabled = false;
+                progressBar.style.width = '0%';
+
+                setTimeout(() => {
+                    progress.classList.add('hidden');
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

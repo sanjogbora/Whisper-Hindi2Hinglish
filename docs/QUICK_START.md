@@ -1,8 +1,28 @@
 # 🚀 Quick Start - Video to SRT Converter
 
-Convert your Hindi-English mixed videos to Roman English subtitles in 3 easy steps!
+Convert your Hindi-English mixed videos to Roman English subtitles!
 
-## Step 1: Install FFmpeg
+## 🎯 For Non-Technical Users (Easiest Method)
+
+**Just double-click the launcher!**
+
+- **Windows:** Double-click `START HERE.bat`
+- **Mac:** Double-click `START HERE.command`
+- **Linux:** Run `./START HERE.sh`
+
+The launcher will:
+- ✅ Check Python and FFmpeg
+- ✅ Install missing dependencies automatically
+- ✅ Start the web server
+- ✅ Open your browser
+
+**See [QUICK_START_VISUAL.md](../QUICK_START_VISUAL.md) for detailed visual guide**
+
+---
+
+## 🛠️ For Developers (Manual Setup)
+
+### Step 1: Install FFmpeg
 
 FFmpeg is required to extract audio from videos.
 
@@ -21,7 +41,7 @@ winget install ffmpeg
 ffmpeg -version
 ```
 
-## Step 2: Install Python Dependencies
+### Step 2: Install Python Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -33,15 +53,14 @@ This installs:
 - Flask (web server)
 - Other utilities
 
-## Step 3: Start Using!
+### Step 3: Start Using!
 
-### 🌐 Option A: Web Interface (Recommended)
+#### 🌐 Option A: Web Interface (Recommended)
 
 **1. Start the server**:
 ```bash
-python api_server.py
+python web_server.py
 ```
-Or double-click: `start_server.bat`
 
 **2. Open browser**:
 ```
@@ -100,7 +119,7 @@ Machine learning bahut important technology hai.
 ### "CUDA out of memory"
 → Use CPU mode:
 ```bash
-python api_server.py --device cpu
+python web_server.py --device cpu
 ```
 
 ### Poor quality transcription
@@ -138,12 +157,11 @@ python video_to_srt.py video.mp4 --model-id Oriserve/Whisper-Hindi2Hinglish-Prim
 
 ## 🆘 Need Help?
 
-1. Run system check:
-   ```bash
-   python test_video_to_srt.py
-   ```
+1. **For launcher issues:**
+   - See `docs/LAUNCHER_GUIDE.md` - Comprehensive launcher troubleshooting
+   - See `QUICK_START_VISUAL.md` - Visual step-by-step guide
 
-2. Read full guide:
+2. **For video conversion:**
    - `VIDEO_TO_SRT_GUIDE.md` - Complete documentation
    - `README.md` - About the AI model
 

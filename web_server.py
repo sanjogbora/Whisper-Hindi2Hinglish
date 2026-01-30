@@ -40,7 +40,13 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-    """Home page with web interface"""
+    """Enhanced landing page with system status"""
+    return render_template('launcher.html')
+
+
+@app.route('/upload-page')
+def upload_page():
+    """Original upload interface (for backwards compatibility)"""
     return render_template('upload.html')
 
 
@@ -74,6 +80,64 @@ def api_info():
 def health():
     """Health check endpoint"""
     return jsonify({'status': 'healthy', 'model': MODEL_CONFIG['model_id']})
+
+
+@app.route('/api/status')
+def system_status():
+    """Check system requirements status"""
+    import subprocess
+    import sys
+
+    status = {
+        'python': True,  # If we're running, Python is installed
+        'python_version': f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
+        'ffmpeg': check_ffmpeg_installed(),
+        'dependencies': check_dependencies(),
+        'device': get_device_info(),
+        'server': True
+    }
+    return jsonify(status)
+
+
+def check_ffmpeg_installed():
+    """Check if FFmpeg is installed"""
+    try:
+        result = subprocess.run(
+            ['ffmpeg', '-version'],
+            capture_output=True,
+            check=True,
+            timeout=5
+        )
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
+        return False
+
+
+def check_dependencies():
+    """Check if all required dependencies are installed"""
+    required = ['flask', 'torch', 'transformers', 'whisper_timestamped']
+    try:
+        for module in required:
+            __import__(module)
+        return True
+    except ImportError:
+        return False
+
+
+def get_device_info():
+    """Get device information for processing"""
+    device = MODEL_CONFIG.get('device', 'cpu')
+
+    if device == 'cuda':
+        if torch.cuda.is_available():
+            gpu_name = torch.cuda.get_device_name(0)
+            return f"CUDA GPU ({gpu_name})"
+        else:
+            return "CPU (CUDA not available)"
+    elif device == 'mps':
+        return "Apple Silicon (MPS)"
+    else:
+        return "CPU"
 
 
 @app.route('/upload', methods=['POST'])
