@@ -3,7 +3,9 @@ Flask API Server for Video to SRT Conversion
 Upload video and get SRT file back
 """
 import argparse
+import logging
 import os
+import subprocess
 import tempfile
 from pathlib import Path
 
@@ -16,6 +18,10 @@ from utils import torch_dtype_from_str, get_device
 from video_to_srt import video_to_srt
 
 app = Flask(__name__, template_folder='templates')
+
+# Reduce logging verbosity for end users - only show important messages
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 # Configuration
 UPLOAD_FOLDER = str(Path.home() / "Downloads")
