@@ -70,7 +70,7 @@ class Server:
                         text = output["text"].strip()
                         logger.info("Recognised Output: %s", text)
                         if text and text != self.old_text:
-                            text = text.replace("nan","")
+                            text = text.replace("nan", "")
                             self.old_text = text
                             ws_out = {"text": text}
                             await ws.send(json.dumps(ws_out))
@@ -106,7 +106,7 @@ class Server:
             while True:
                 text = await self.text_queue.get()
                 if text and text != self.old_text:
-                    text = text.replace("nan","")
+                    text = text.replace("nan", "")
                     self.old_text = text
                     ws_out = {"text": text}
 
@@ -144,7 +144,9 @@ if __name__ == "__main__":
     parser.add_argument("--host", default="0.0.0.0", help="Host to bind")
     parser.add_argument("--port", type=int, default=8000, help="Port to bind")
     parser.add_argument(
-        "--model-id", default="Oriserve/Whisper-Hindi2Hinglish-Swift", help="Model ID"
+        "--model-id",
+        default="Oriserve/Whisper-Hindi2Hinglish-Prime",
+        help="Whisper model size (default: large. Options: tiny, base, small, medium, large, large-v2, large-v3)",
     )
     parser.add_argument("--device", default="cuda", help="Device to run the model on")
     parser.add_argument(

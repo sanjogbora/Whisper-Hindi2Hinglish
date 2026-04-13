@@ -1,0 +1,13 @@
+{
+  "session_id": "f6f775a0-da69-4832-a569-687a1c695679",
+  "video_path": "/home/ishanp/Downloads/2_converted.mp4",
+  "audio_path": null,
+  "captions_path": "sessions/f6f775a0-da69-4832-a569-687a1c695679/captions.srt",
+  "status": "transcribed",
+  "created_at": "2026-02-12T04:09:18.952283",
+  "updated_at": "2026-02-12T04:09:51.636199",
+  "caption_style": "reels_standard",
+  "metadata": {
+    "media_type": "video"
+  }
+}

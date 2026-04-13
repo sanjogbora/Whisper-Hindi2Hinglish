@@ -1,10 +1,17 @@
-import audioop
+try:
+    import audioop
+except ImportError:
+    audioop = None
 from typing import Tuple
 
 import librosa
 import numpy as np
 import torch
-import webrtcvad
+
+try:
+    import webrtcvad
+except ImportError:
+    webrtcvad = None
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 
 from logger import logger
@@ -27,9 +34,13 @@ def get_device(preferred_device: str = "cuda") -> str:
             logger.info(f"✓ Using GPU: {gpu_name}")
         else:
             device = "cpu"
-            logger.warning("⚠ CUDA not available. Falling back to CPU (slower performance)")
+            logger.warning(
+                "⚠ CUDA not available. Falling back to CPU (slower performance)"
+            )
             logger.info("💡 To use GPU, install CUDA-enabled PyTorch:")
-            logger.info("   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121")
+            logger.info(
+                "   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121"
+            )
     else:
         device = "cpu"
         logger.info("Using CPU for inference")
@@ -76,10 +87,7 @@ def load_pipe(
         torch_dtype = torch.float32
 
     model = AutoModelForSpeechSeq2Seq.from_pretrained(
-        model_id,
-        torch_dtype=torch_dtype,
-        low_cpu_mem_usage=True,
-        use_safetensors=True
+        model_id, torch_dtype=torch_dtype, low_cpu_mem_usage=True, use_safetensors=True
     )
     model.to(device)
 
@@ -98,7 +106,7 @@ def load_pipe(
 
 
 def audio_pre_processor(
-    audio: bytes, sr: int, encoding: str, vad: webrtcvad.Vad, target_sr: int = 16000
+    audio: bytes, sr: int, encoding: str, vad=None, target_sr: int = 16000
 ) -> Tuple[np.ndarray, bool]:
     """
     @function audio_pre_processor
@@ -106,15 +114,17 @@ def audio_pre_processor(
     @param audio: audio bytes received from client
     @param sr: sampling rate of the audio received
     @param encoding: encoding of the audio sent
-    @param vad: webrtcvad vad object to check for speech presence
+    @param vad: webrtcvad vad object to check for speech presence (optional)
     """
     if encoding == "mulaw":
         audio = audioop.ulaw2in(audio, 2)
 
-    try:
-        is_speech_present = vad.is_speech(audio, sr)
-    except Exception:
-        is_speech_present = False
+    is_speech_present = True
+    if webrtcvad and vad:
+        try:
+            is_speech_present = vad.is_speech(audio, sr)
+        except Exception:
+            is_speech_present = True
 
     array = np.frombuffer(audio, dtype=np.int16).astype(np.float32) / 32768.0
     if sr != 16_000:

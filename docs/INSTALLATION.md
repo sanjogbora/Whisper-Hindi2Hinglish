@@ -54,14 +54,11 @@ Complete installation instructions for Whisper-Hindi2Hinglish + Video-to-SRT.
 git clone https://github.com/sanjogbora/Whisper-Hindi2Hinglish.git
 cd Whisper-Hindi2Hinglish
 
-# Create virtual environment
-python -m venv venv
+# Create conda environment (if not already created)
+conda create -n whisper-hindi python=3.10
 
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
+# Activate conda environment
+conda activate whisper-hindi
 
 # Install dependencies
 pip install -r requirements.txt
@@ -77,11 +74,28 @@ pip install git+https://github.com/sanjogbora/Whisper-Hindi2Hinglish.git
 
 ```bash
 # Clone repository
-git clone https://github.com/sanjogbora/Whisper-Hindi2Hinglish.git
+git clone https://github.com/YOUR-USERNAME/Whisper-Hindi2Hinglish.git
 cd Whisper-Hindi2Hinglish
 
-# Build and run
-docker-compose up
+# Create conda environment (if not already created)
+conda create -n whisper-hindi python=3.10
+
+# Activate conda environment
+conda activate whisper-hindi
+
+# Install all dependencies
+pip install -r requirements-dev.txt
+
+# Install in editable mode
+pip install -e .
+
+# Verify CLI commands work
+whisper-srt --help
+whisper-web --help
+whisper-ws --help
+
+# Run tests
+pytest tests/
 ```
 
 ---
