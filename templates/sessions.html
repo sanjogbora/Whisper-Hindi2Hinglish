@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessions - Caption Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-tertiary: #0f3460;
+            --accent-primary: #e94560;
+            --accent-secondary: #4ecca3;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-yellow: #f59e0b;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6b7280;
+            --border-color: #374151;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .filter-group label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            min-width: 200px;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        button {
+            padding: 0.625rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 150ms ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-primary) 100%);
+            color: var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-blue);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-secondary) 100%);
+            color: var(--text-primary);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--accent-red) 0%, #dc2626 100%);
+            color: var(--text-primary);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
+        }
+
+        .filter-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        /* Sessions Table */
+        .sessions-container {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .sessions-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .sessions-table thead {
+            background: var(--bg-tertiary);
+        }
+
+        .sessions-table th {
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .sessions-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sessions-table tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .sessions-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .session-id {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+        }
+
+        .session-video {
+            font-weight: 500;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status-badge.created {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-yellow);
+        }
+
+        .status-badge.created::before {
+            background: var(--accent-yellow);
+        }
+
+        .status-badge.transcribed {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .status-badge.transcribed::before {
+            background: var(--accent-blue);
+        }
+
+        .status-badge.editing {
+            background: rgba(233, 69, 96, 0.15);
+            color: var(--accent-primary);
+        }
+
+        .status-badge.editing::before {
+            background: var(--accent-primary);
+        }
+
+        .status-badge.rendering {
+            background: rgba(168, 85, 247, 0.15);
+            color: #a855f7;
+        }
+
+        .status-badge.rendering::before {
+            background: #a855f7;
+        }
+
+        .status-badge.complete {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+        }
+
+        .status-badge.complete::before {
+            background: var(--accent-green);
+        }
+
+        .status-badge.error {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+        }
+
+        .status-badge.error::before {
+            background: var(--accent-red);
+        }
+
+        .timestamp {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            color: var(--accent-red);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .sessions-table {
+                font-size: 0.875rem;
+            }
+
+            .sessions-table th,
+            .sessions-table td {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .session-video {
+                max-width: 100px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="header-left">
+                <h1>📋 Caption Sessions</h1>
+            </div>
+            <div class="header-actions">
+                <a href="/editor/new" class="btn-primary">
+                    ➕ Create New Session
+                </a>
+                <a href="/" class="btn-secondary">
+                    🏠 Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% if error %}
+        <div class="error-message">
+            <span>❌</span>
+            <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value">{{ total_count }}</div>
+                <div class="stat-label">Total Sessions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{{ filtered_count }}</div>
+                <div class="stat-label">Displayed</div>
+            </div>
+            {% if status_counts %}
+            {% for status, count in status_counts.items() %}
+            <div class="stat-item">
+                <div class="stat-value">{{ count }}</div>
+                <div class="stat-label">{{ status|title }}</div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label for="searchInput">Search Session ID:</label>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Enter session ID..."
+                    value="{{ search_query or '' }}"
+                >
+            </div>
+
+            <div class="filter-group">
+                <label>Filter by Status:</label>
+                <div class="filter-buttons">
+                    <button class="filter-btn btn-sm {% if not status_filter %}active{% endif %}" data-status="">
+                        All
+                    </button>
+                    <button class="filter-btn btn-sm {% if status_filter == 'created' %}active{% endif %}" data-status="created">
+                        Created
+                    </button>
+                    <button class="filter-btn btn-sm {% if status_filter == 'transcribed' %}active{% endif %}" data-status="transcribed">
+                        Transcribed
+                    </button>
+                    <button class="filter-btn btn-sm {% if status_filter == 'editing' %}active{% endif %}" data-status="editing">
+                        Editing
+                    </button>
+                    <button class="filter-btn btn-sm {% if status_filter == 'rendering' %}active{% endif %}" data-status="rendering">
+                        Rendering
+                    </button>
+                    <button class="filter-btn btn-sm {% if status_filter == 'complete' %}active{% endif %}" data-status="complete">
+                        Complete
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sessions Table -->
+        <div class="sessions-container">
+            {% if sessions %}
+            <table class="sessions-table">
+                <thead>
+                    <tr>
+                        <th>Session ID</th>
+                        <th>Video File</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for session in sessions %}
+                    <tr>
+                        <td>
+                            <span class="session-id">{{ session.session_id[:8] }}...</span>
+                        </td>
+                        <td>
+                            <div class="session-video" title="{{ session.video_path }}">
+                                {{ session.video_path|basename }}
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge {{ session.status }}">
+                                {{ session.status|title }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="timestamp">{{ session.created_at[:10] }}</span>
+                        </td>
+                        <td>
+                            <span class="timestamp">{{ session.updated_at[:10] }}</span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="/editor/{{ session.session_id }}" class="btn-primary btn-sm">
+                                    ✏️ Edit
+                                </a>
+                                <button
+                                    class="btn-danger btn-sm"
+                                    onclick="deleteSession('{{ session.session_id }}')"
+                                >
+                                    🗑️ Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-state-icon">📭</div>
+                <div class="empty-state-text">
+                    {% if search_query or status_filter %}
+                        No sessions match your filters.
+                    {% else %}
+                        No sessions found. Create your first session to get started!
+                    {% endif %}
+                </div>
+                <a href="/editor/new" class="btn-primary">
+                    ➕ Create New Session
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <script>
+        // Filter button functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const status = this.dataset.status;
+                const searchValue = document.getElementById('searchInput').value;
+                
+                // Build URL with filters
+                const params = new URLSearchParams();
+                if (status) params.set('status', status);
+                if (searchValue) params.set('search', searchValue);
+                
+                // Navigate to filtered URL
+                window.location.href = `/sessions?${params.toString()}`;
+            });
+        });
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const activeFilterBtn = document.querySelector('.filter-btn.active');
+                const status = activeFilterBtn ? activeFilterBtn.dataset.status : '';
+                
+                const params = new URLSearchParams();
+                if (status) params.set('status', status);
+                if (this.value) params.set('search', this.value);
+                
+                window.location.href = `/sessions?${params.toString()}`;
+            }
+        });
+
+        // Delete session function
+        async function deleteSession(sessionId) {
+            if (!confirm(`Are you sure you want to delete session ${sessionId}?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/sessions/${sessionId}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Reload page to show updated list
+                    window.location.reload();
+                } else {
+                    alert(`Error: ${data.error || 'Failed to delete session'}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        }
+
+        // Custom filter for basename
+        function basename(path) {
+            return path.split('/').pop().split('\\').pop();
+        }
+    </script>
+</body>
+</html>

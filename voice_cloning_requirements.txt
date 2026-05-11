@@ -1,0 +1,6 @@
+# Voice Cloning Pipeline Requirements
+# Additional dependencies for the voice cloning pipeline
+
+requests>=2.31.0
+librosa>=0.10.0
+soundfile>=0.12.0

@@ -1,0 +1,67 @@
+[Script Info]
+Title: Whisper Captions
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Roboto Bold,120,&H00FFFFFF,&H00FFFFFF,&H00000000,&H00000000,1,0,0,0,100,100,0,0,1,4,2,2,10,10,10,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.76,0:00:03.12,Default,,0,0,0,,Kalvana kata wealth hasaltsu
+Dialogue: 0,0:00:03.12,0:00:03.58,Default,,0,0,0,,sini vanti.
+Dialogue: 0,0:00:04.13,0:00:05.13,Default,,0,0,0,,Arna wo ek frame
+Dialogue: 0,0:00:05.13,0:00:06.09,Default,,0,0,0,,boy break down karungwa
+Dialogue: 0,0:00:06.09,0:00:06.91,Default,,0,0,0,,jom mani,
+Dialogue: 0,0:00:07.54,0:00:08.91,Default,,0,0,0,,mindset, relationships, habits,
+Dialogue: 0,0:00:09.32,0:00:11.17,Default,,0,0,0,,sub-traplayo them. And trust
+Dialogue: 0,0:00:11.17,0:00:11.82,Default,,0,0,0,,me, this is the
+Dialogue: 0,0:00:11.82,0:00:12.17,Default,,0,0,0,,game change.
+Dialogue: 0,0:00:13.24,0:00:14.24,Default,,0,0,0,,So like art style,
+Dialogue: 0,0:00:14.46,0:00:15.72,Default,,0,0,0,,art style, I spent
+Dialogue: 0,0:00:15.72,0:00:17.69,Default,,0,0,0,,figuring out kikko, kese
+Dialogue: 0,0:00:17.69,0:00:19.64,Default,,0,0,0,,afvertlessly will build karulata
+Dialogue: 0,0:00:20.07,0:00:21.12,Default,,0,0,0,,when baaki sub-block grind
+Dialogue: 0,0:00:21.12,0:00:22.21,Default,,0,0,0,,kar kar karadam. Like
+Dialogue: 0,0:00:22.21,0:00:24.00,Default,,0,0,0,,his caronsar, it's not
+Dialogue: 0,0:00:24.00,0:00:25.71,Default,,0,0,0,,hard to architecture.
+Dialogue: 0,0:00:26.51,0:00:27.44,Default,,0,0,0,,And I call it
+Dialogue: 0,0:00:27.44,0:00:28.76,Default,,0,0,0,,financial intelligence.
+Dialogue: 0,0:00:58.92,0:01:01.78,Default,,0,0,0,,-196th, -196th, -196th, -196th,
+Dialogue: 0,0:01:02.50,0:01:04.04,Default,,0,0,0,,-196th, -196th,
+Dialogue: 0,0:01:04.56,0:01:07.07,Default,,0,0,0,,-196th, -196th, -196th,
+Dialogue: 0,0:01:07.81,0:01:09.84,Default,,0,0,0,,-196th, -196th, -196th, -196th,
+Dialogue: 0,0:01:10.00,0:01:11.64,Default,,0,0,0,,-196th, -196th, -196th, -196th,
+Dialogue: 0,0:01:11.64,0:01:14.37,Default,,0,0,0,,-196th, -196th, -196th, -196th,
+Dialogue: 0,0:01:14.37,0:01:17.50,Default,,0,0,0,,-196th, -196th, -196th,
+Dialogue: 0,0:01:18.50,0:01:21.06,Default,,0,0,0,,-196th, -196th, -196th, -196th,
+Dialogue: 0,0:01:21.06,0:01:27.45,Default,,0,0,0,,-196th, -196th, -196th, -196th,
+Dialogue: 0,0:01:27.65,0:01:28.01,Default,,0,0,0,,-196th, -196th, -196th, -196th,
+Dialogue: 0,0:01:28.07,0:01:30.90,Default,,0,0,0,,-196th, Kali, Kali, Kali,
+Dialogue: 0,0:01:31.04,0:01:32.15,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:32.23,0:01:33.54,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:33.54,0:01:33.70,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:33.71,0:01:33.79,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:33.79,0:01:33.87,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:33.87,0:01:33.95,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:33.95,0:01:34.04,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:34.04,0:01:34.12,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:34.12,0:01:34.20,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:34.20,0:01:34.28,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:34.28,0:01:34.35,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:34.35,0:01:34.43,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:34.43,0:01:34.51,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:34.51,0:01:34.59,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:34.59,0:01:35.64,Default,,0,0,0,,Kali, Kali, Kali, Kali,
+Dialogue: 0,0:01:35.64,0:01:38.93,Default,,0,0,0,,Kali, Kali, Kali,
+Dialogue: 0,0:01:39.81,0:01:41.71,Default,,0,0,0,,Kali, Kali,
+Dialogue: 0,0:01:44.35,0:01:44.92,Default,,0,0,0,,Kali,
+Dialogue: 0,0:01:46.59,0:01:47.62,Default,,0,0,0,,Kali, Kali, Kali,
+Dialogue: 0,0:01:48.98,0:01:52.18,Default,,0,0,0,,Kali,
+Dialogue: 0,0:01:53.04,0:01:54.01,Default,,0,0,0,,Kali,
+Dialogue: 0,0:01:58.01,0:01:58.90,Default,,0,0,0,,K

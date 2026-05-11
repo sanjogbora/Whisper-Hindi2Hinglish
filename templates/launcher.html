@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whisper Hindi2Hinglish - Video to SRT Converter</title>
+    <title>Whisper Hindi2Hinglish - Media to SRT Converter</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -92,7 +92,7 @@
                 🎬 Whisper Hindi2Hinglish
             </h1>
             <p class="text-muted-foreground text-sm">
-                Convert Hindi/Hinglish videos to SRT subtitles with AI
+                Convert Hindi/Hinglish video or audio to SRT subtitles with AI
             </p>
         </div>
 
@@ -154,7 +154,7 @@
                 <!-- Upload Area -->
                 <div id="uploadArea"
                      class="relative border-2 border-dashed border-border rounded-lg p-12 text-center cursor-pointer transition-all hover:border-primary/50 hover:bg-accent/50 group">
-                    <input type="file" id="videoFile" name="video" accept="video/*" required class="hidden">
+                    <input type="file" id="videoFile" name="video" accept="video/*,audio/*" required class="hidden">
 
                     <div class="flex flex-col items-center gap-3">
                         <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -168,7 +168,7 @@
                                 <span class="text-primary">Click to upload</span> or drag and drop
                             </p>
                             <p class="text-xs text-muted-foreground">
-                                MP4, AVI, MOV, MKV, WEBM (Max 500MB)
+                                MP4, AVI, MOV, MKV, WEBM, MP3, WAV, OGG, M4A (Max 500MB)
                             </p>
                         </div>
                     </div>
@@ -232,9 +232,9 @@
                 First Time Here?
             </h3>
             <ol class="list-decimal list-inside space-y-2 text-sm text-blue-800">
-                <li><strong>Upload your video:</strong> Drag and drop or click to select a video file</li>
+                <li><strong>Upload your media:</strong> Drag and drop or click to select a video or audio file</li>
                 <li><strong>Choose quality:</strong> Prime = best accuracy, Swift = faster processing</li>
-                <li><strong>Click "Generate SRT File":</strong> Wait while the AI transcribes your video</li>
+                <li><strong>Click "Generate SRT File":</strong> Wait while the AI transcribes your media</li>
                 <li><strong>Download:</strong> Your .srt subtitle file will download automatically</li>
                 <li><strong>Use in video editor:</strong> Import the .srt file into your video editing software</li>
             </ol>
@@ -251,8 +251,8 @@
                 <div class="text-sm text-amber-800">
                     <p class="font-medium mb-1">Processing Information</p>
                     <p class="text-amber-700">
-                        Videos are transcribed to Hinglish (Hindi words in Roman script).
-                        Processing time varies based on video length and selected model quality.
+                        Media is transcribed to Hinglish (Hindi words in Roman script).
+                        Processing time varies based on media length and selected model quality.
                         Keep this browser tab open while processing.
                     </p>
                 </div>

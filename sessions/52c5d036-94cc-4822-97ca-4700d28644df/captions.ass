@@ -1,0 +1,103 @@
+[Script Info]
+Title: Whisper Captions
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Fira Sans Compressed Medium,54,&H00FFFFFF,&H00FFFFFF,&H00000000,&HFF000000,0,0,0,0,100,100,0,0,3,15,0,5,10,10,10,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.20,0:00:01.35,Default,,0,0,0,,KAL MAINNE KAHA THA
+Dialogue: 0,0:00:01.35,0:00:03.16,Default,,0,0,0,,WEALTH HUSTLE SE NAHIN
+Dialogue: 0,0:00:03.16,0:00:04.66,Default,,0,0,0,,BANTI. AAJ MAIN VAH
+Dialogue: 0,0:00:04.66,0:00:05.54,Default,,0,0,0,,EK FRAMEWORK BREAK DOWN
+Dialogue: 0,0:00:05.54,0:00:07.12,Default,,0,0,0,,KAROONGA JO MONEY, MINDSET,
+Dialogue: 0,0:00:07.54,0:00:09.50,Default,,0,0,0,,RELATIONSHIPS, HABITS SAB PAR
+Dialogue: 0,0:00:09.50,0:00:10.01,Default,,0,0,0,,APPLY HOTA HAI.
+Dialogue: 0,0:00:10.56,0:00:11.35,Default,,0,0,0,,AND TRUST ME THIS
+Dialogue: 0,0:00:11.35,0:00:12.14,Default,,0,0,0,,IS A GAME CHANGER.
+Dialogue: 0,0:00:12.25,0:00:14.09,Default,,0,0,0,,TO DEKH AATH SAAL,
+Dialogue: 0,0:00:14.09,0:00:15.16,Default,,0,0,0,,DEKH AATH SAAL I
+Dialogue: 0,0:00:15.16,0:00:16.62,Default,,0,0,0,,SPENT FIGURING OUT KI
+Dialogue: 0,0:00:16.62,0:00:18.50,Default,,0,0,0,,KO KAISE EFFORTLESSLY WEALTH
+Dialogue: 0,0:00:18.50,0:00:19.53,Default,,0,0,0,,BUILD KAR LETE HAIN
+Dialogue: 0,0:00:19.53,0:00:20.62,Default,,0,0,0,,JAB BAAKI SAB LOG
+Dialogue: 0,0:00:20.62,0:00:21.55,Default,,0,0,0,,GRIND KARTE RAHTE HAIN.
+Dialogue: 0,0:00:21.69,0:00:22.78,Default,,0,0,0,,LIKE ISKA ANSWER HAI.
+Dialogue: 0,0:00:22.83,0:00:24.32,Default,,0,0,0,,IT'S NOT HARD TO
+Dialogue: 0,0:00:24.32,0:00:27.01,Default,,0,0,0,,ARCHITECTURE AND I CALL
+Dialogue: 0,0:00:27.01,0:00:29.30,Default,,0,0,0,,IT FINANCIAL INTELLIGENCE. ISKE
+Dialogue: 0,0:00:29.30,0:00:30.76,Default,,0,0,0,,PAANCH MAIN COMPONENTS HAIN.
+Dialogue: 0,0:00:30.76,0:00:32.65,Default,,0,0,0,,1 ASSETS JO NIND
+Dialogue: 0,0:00:32.65,0:00:33.75,Default,,0,0,0,,MEIN B POCKET MEIN
+Dialogue: 0,0:00:33.75,0:00:34.88,Default,,0,0,0,,VALUE DAALTE HAIN. SECOND
+Dialogue: 0,0:00:34.88,0:00:36.21,Default,,0,0,0,,LIABILITIES HO SOTE VAH
+Dialogue: 0,0:00:36.21,0:00:37.20,Default,,0,0,0,,TUMHAARI JEB KHAALI KAR
+Dialogue: 0,0:00:37.20,0:00:38.53,Default,,0,0,0,,RAHE HO. 3 INCOME
+Dialogue: 0,0:00:38.53,0:00:39.93,Default,,0,0,0,,WHAT COMES IN, FOURTH
+Dialogue: 0,0:00:39.93,0:00:41.20,Default,,0,0,0,,EXPENSES WHAT GOES OUT
+Dialogue: 0,0:00:41.20,0:00:42.29,Default,,0,0,0,,AND FIFTH CASH FLOW.
+Dialogue: 0,0:00:42.35,0:00:43.60,Default,,0,0,0,,INCOME AUR EXPENSES KE
+Dialogue: 0,0:00:43.60,0:00:44.57,Default,,0,0,0,,BEACH KA GAYA. AB
+Dialogue: 0,0:00:44.57,0:00:45.67,Default,,0,0,0,,VAH BAAT JO KI
+Dialogue: 0,0:00:45.67,0:00:46.89,Default,,0,0,0,,KOI FINANCIAL GURU NAHIN
+Dialogue: 0,0:00:46.89,0:00:48.07,Default,,0,0,0,,BATAATA KI YAH SAME
+Dialogue: 0,0:00:48.07,0:00:49.43,Default,,0,0,0,,ARCHITECTURE LIFE KE HAR
+Dialogue: 0,0:00:49.43,0:00:50.43,Default,,0,0,0,,AREA MEIN APPLY HOTA
+Dialogue: 0,0:00:50.43,0:00:51.07,Default,,0,0,0,,HAI. LIKE THINK ABOUT
+Dialogue: 0,0:00:51.07,0:00:51.67,Default,,0,0,0,,IT. LIKE HAVE A
+Dialogue: 0,0:00:51.70,0:00:53.06,Default,,0,0,0,,PRODUCTIVE ROUTINE ACID HAI.
+Dialogue: 0,0:00:53.14,0:00:54.79,Default,,0,0,0,,DOOM SCROLLING LIABILITY LIKE
+Dialogue: 0,0:00:54.79,0:00:56.60,Default,,0,0,0,,PEOPLE SUPPORTIVE NETWORK ACID
+Dialogue: 0,0:00:56.60,0:00:58.03,Default,,0,0,0,,HAI TOXIC DOST LIABILITY
+Dialogue: 0,0:00:58.03,0:00:59.78,Default,,0,0,0,,HAI THOUGHTS GROWTH MINDSET
+Dialogue: 0,0:00:59.78,0:01:01.42,Default,,0,0,0,,ACID HAI. LOG KYA
+Dialogue: 0,0:01:01.42,0:01:03.03,Default,,0,0,0,,KAHENGE LIABILITY HAI SAME
+Dialogue: 0,0:01:03.03,0:01:05.56,Default,,0,0,0,,PATTERNS EVERYWHERE LIKE MAJORITY
+Dialogue: 0,0:01:05.56,0:01:07.14,Default,,0,0,0,,LOG EK HUGE MISTAKE
+Dialogue: 0,0:01:07.14,0:01:08.15,Default,,0,0,0,,KAR RAHE HAIN VO
+Dialogue: 0,0:01:08.15,0:01:09.35,Default,,0,0,0,,SIRPH MONEY KO OPTIMIZE
+Dialogue: 0,0:01:09.35,0:01:10.18,Default,,0,0,0,,KAR RAHE HAIN SALARY
+Dialogue: 0,0:01:10.18,0:01:11.51,Default,,0,0,0,,BADHAO KHARCHE KAM KARO
+Dialogue: 0,0:01:11.51,0:01:12.76,Default,,0,0,0,,BUT BOSS TUMHAARE CHHAH
+Dialogue: 0,0:01:12.76,0:01:13.81,Default,,0,0,0,,DOMAINS IGNORE HO RAHE
+Dialogue: 0,0:01:13.81,0:01:14.98,Default,,0,0,0,,HAIN. REAL WEALTH TAB
+Dialogue: 0,0:01:14.98,0:01:15.92,Default,,0,0,0,,BANTI HAI JAB TUM
+Dialogue: 0,0:01:15.92,0:01:17.04,Default,,0,0,0,,SAAT AUR KO SIMULTANEOUSLY
+Dialogue: 0,0:01:17.04,0:01:18.48,Default,,0,0,0,,OPTIMIZE KAR RAHE HO
+Dialogue: 0,0:01:18.48,0:01:19.34,Default,,0,0,0,,FORMULA SIMPLE HAI.
+Dialogue: 0,0:01:21.70,0:01:23.93,Default,,0,0,0,,POSITIVE CHAAHE VAH PAISA
+Dialogue: 0,0:01:23.93,0:01:25.68,Default,,0,0,0,,HO JAMA KARO. AB
+Dialogue: 0,0:01:25.68,0:01:26.84,Default,,0,0,0,,SEE EK TYPICAL MEDICAL
+Dialogue: 0,0:01:26.84,0:01:28.48,Default,,0,0,0,,UPBRINGING MEIN LIKE HAMEN
+Dialogue: 0,0:01:28.48,0:01:29.40,Default,,0,0,0,,KYA SIKHAAYA JAATA HAI
+Dialogue: 0,0:01:29.40,0:01:31.34,Default,,0,0,0,,KI REPUTATION LOG KYA
+Dialogue: 0,0:01:31.34,0:01:32.04,Default,,0,0,0,,KAHENGE LIKE YAH SAB
+Dialogue: 0,0:01:32.04,0:01:32.76,Default,,0,0,0,,ZAROOR I GET IT
+Dialogue: 0,0:01:32.76,0:01:34.64,Default,,0,0,0,,BUT FINANCIAL INTELLIGENCE SE
+Dialogue: 0,0:01:34.64,0:01:35.87,Default,,0,0,0,,LIKE YAH EXTERNAL VALIDATION
+Dialogue: 0,0:01:35.87,0:01:37.06,Default,,0,0,0,,TUMHEN KYA RETURNS DE
+Dialogue: 0,0:01:37.06,0:01:37.90,Default,,0,0,0,,RAHA HAI KYA MAINTENANCE
+Dialogue: 0,0:01:37.90,0:01:40.12,Default,,0,0,0,,MAANG RAHA HAI? AGAR
+Dialogue: 0,0:01:40.12,0:01:40.84,Default,,0,0,0,,YAH KAUN SA TENANCY
+Dialogue: 0,0:01:40.84,0:01:42.12,Default,,0,0,0,,YAH PRESSURE HIGH HAI
+Dialogue: 0,0:01:42.12,0:01:42.98,Default,,0,0,0,,TO VAH ACID NAHIN
+Dialogue: 0,0:01:42.98,0:01:43.68,Default,,0,0,0,,HAI EK LIABILITY HAI
+Dialogue: 0,0:01:43.68,0:01:44.95,Default,,0,0,0,,AND IT'S RAINING YOUR
+Dialogue: 0,0:01:44.95,0:01:45.85,Default,,0,0,0,,ENERGY WHILE YOU ARE
+Dialogue: 0,0:01:45.85,0:01:47.56,Default,,0,0,0,,SLEEPING. SO KAL MAIN
+Dialogue: 0,0:01:47.56,0:01:48.79,Default,,0,0,0,,POORA CHITHA KHOL DOONGA
+Dialogue: 0,0:01:48.79,0:01:50.20,Default,,0,0,0,,REGARDING MY PERSONAL ASS
+Dialogue: 0,0:01:50.20,0:01:51.21,Default,,0,0,0,,LIABILITY FOR CASH FLOW.
+Dialogue: 0,0:01:51.70,0:01:52.71,Default,,0,0,0,,CROSS ALL 7 DOMAINS
+Dialogue: 0,0:01:52.71,0:01:54.07,Default,,0,0,0,,LIKE FOLLOWER I AM
+Dialogue: 0,0:01:54.07,0:01:55.29,Default,,0,0,0,,NOT SURE ARCHITECTURE VARNA
+Dialogue: 0,0:01:55.29,0:01:56.48,Default,,0,0,0,,MAT KARO LIKE THE
+Dialogue: 0,0:01:56.48,0:01:57.29,Default,,0,0,0,,FRAMEWORKS HUA KI TO
+Dialogue: 0,0:01:57.29,0:01:58.00,Default,,0,0,0,,BE SEE YA.

@@ -40,9 +40,11 @@ git remote add upstream https://github.com/sanjogbora/Whisper-Hindi2Hinglish.git
 ### 2. Set Up Development Environment
 
 ```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Create conda environment (if not already created)
+conda create -n whisper-hindi python=3.10
+
+# Activate conda environment
+conda activate whisper-hindi
 
 # Install dependencies (including dev dependencies)
 pip install -r requirements-dev.txt

@@ -1,0 +1,27 @@
+{
+  "session_id": "52c5d036-94cc-4822-97ca-4700d28644df",
+  "video_path": "/home/ishanp/Downloads/2_converted.mp4",
+  "audio_path": null,
+  "captions_path": "sessions/52c5d036-94cc-4822-97ca-4700d28644df/captions.srt",
+  "status": "complete",
+  "created_at": "2026-02-12T03:01:52.731354",
+  "updated_at": "2026-02-12T06:45:37.083184",
+  "caption_style": "bold_impact",
+  "metadata": {
+    "media_type": "video",
+    "text_style": {
+      "font_family": "Fira Sans Compressed Medium",
+      "font_size": 36,
+      "color": "#FFFFFF",
+      "bold": false,
+      "italic": false,
+      "outline_color": "#000000",
+      "outline_width": 15,
+      "shadow": false,
+      "position_x": 50,
+      "position_y": 50,
+      "alignment": "center"
+    },
+    "output_path": "/home/ishanp/Videos/2_converted/2_converted_captioned.mp4"
+  }
+}

@@ -1,0 +1,102 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                  VIDEO CAPTION EDITOR - STYLE PREVIEW                       ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║   ┌──────────────────────────────────────────────────────────────────────┐   ║
+║   │                                                                      │   ║
+║   │                    [VIDEO FRAME - 9:16]                            │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                    ╔═══════════════════════════════════════╗        │   ║
+║   │                    ║ यह एक उदाहरण है                    ║        │   ║
+║   │                    ║ This is an example caption text       ║        │   ║
+║   │                    ╚═══════════════════════════════════════╝        │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   │                                                                      │   ║
+║   └──────────────────────────────────────────────────────────────────────┘   ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                              STYLE PRESETS                                  ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  [✓] REELS STANDARD (Instagram Reels/TikTok)                               ║
+║  [ ] YOUTUBE SHORTS SAFE (YouTube UI-aware)                                 ║
+║  [ ] MINIMAL CLEAN (Semi-transparent background)                            ║
+║  [ ] BOLD IMPACT (High contrast)                                            ║
+║  [ ] CINEMATIC (Elegant italic)                                             ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                         STYLE CONFIGURATION                                 ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  Typography:                                                                ║
+║    Font Family:  [Roboto               ▼]    Size: [36px] ▬●───●○── 72     ║
+║    Color:        [■ #FFFFFF           ]    Bold:  [✓]   Italic: [ ]         ║
+║                                                                              ║
+║  Position:                                                                  ║
+║    Horizontal:   [50%] ▬●─────────────────○── 95%  ←[Center]→              ║
+║    Vertical:     [80%] ▬─────────────●────○── 95%                          ║
+║                                                                              ║
+║  Effects:                                                                   ║
+║    Outline:      [✓]  Color: [■ #000000]  Width: [2px] ▬●───○── 10       ║
+║    Shadow:       [✓]                                                     ║
+║    Background:   [ ]  Color: [■ #00000000]                               ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                              TIMELINE PREVIEW                               ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  0:00  ▲  0:05  0:10  0:15  0:20  0:25  0:30  0:35  0:40  0:45  0:50    ║
+║  ┌────┴───┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐       ║
+║  │[IMG]   │[IMG]│[IMG]│[IMG]│[IMG]│[IMG]│[IMG]│[IMG]│[IMG]│[IMG]│[IMG]│       ║
+║  │        │     │     │     │     │     │     │     │     │     │     │       ║
+║  │╔═════╗ │     │╔════╗│     │╔════╗│     │╔════╗│     │╔════╗│     │       ║
+║  │║Text ║ │     │║Text║│     │║Text║│     │║Text║│     │║Text║│     │       ║
+║  │╚═════╝ │     │╚════╝│     │╚════╝│     │╚════╝│     │╚════╝│     │       ║
+║  └────┬───┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘       ║
+║       │                                                                      ║
+║       ▼ Playhead (current frame)                                           ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                           ACTION BUTTONS                                    ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║   [🔄 Generate Preview]  [✨ Apply Style]  [🎬 Embed Captions]  [💾 Save]   ║
+║                                                                              ║
+║   Progress: [████████████████████████░░░░] 75%                              ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Caption Style Details (Reels Standard):
+┌────────────────────────────────────────────────────────────────────────────┐
+│ Font: Roboto Bold (36px)                                                   │
+│ Color: White (#FFFFFF) with black outline (2px)                            │
+│ Position: Bottom center (50% horizontal, 80% vertical)                    │
+│ Effects: Shadow enabled for better readability                             │
+│ Target: 9:16 vertical video (Instagram Reels, TikTok)                      │
+│                                                                            │
+│ ✓ Optimized for social media viewing                                      │
+│ ✓ High contrast for visibility on all backgrounds                          │
+│ ✓ Safe zone aware (avoids platform UI overlays)                           │
+│ ✓ Professional appearance suitable for content creators                    │
+└────────────────────────────────────────────────────────────────────────────┘
+
+Timeline Preview Features:
+┌────────────────────────────────────────────────────────────────────────────┐
+│ • 1fps frame extraction for precise timing review                         │
+│ • Caption overlay on each frame shows exact placement                     │
+│ • Click-to-seek navigation to any timestamp                               │
+│ • Playhead shows current position during playback                         │
+│ • Scrollable for long videos (up to 60 frames visible)                    │
+│ • Lazy loading for optimal performance                                    │
+└────────────────────────────────────────────────────────────────────────────┘
